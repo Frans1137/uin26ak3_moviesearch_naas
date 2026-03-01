@@ -16,8 +16,7 @@ export default function MovieCard({ movie }) {
                     <p>{movie.Year}</p>
                     <img 
                         src={poster} 
-                        alt={`Forsidebilde av filmen 
-                        ${movie.Title}`}
+                        alt={`Forsidebilde av filmen ${movie.Title}`}
                         onError={(e) => { e.target.src = "/no-image.png" }}
                     />
                 </Link>

@@ -29,12 +29,15 @@ export default function Movie() {
         }
 
         getMovieDetails()
-
-    }, [imdbID])
+    }
+    , [imdbID]
+)
 
     if (!film) {
         return <p>Henter informasjon om film</p>
     }
+
+    const poster = film.Poster !== "N/A" ? film.Poster : "/no-image.png"
 
     return (
         <main>
@@ -42,8 +45,18 @@ export default function Movie() {
                 <header>
                     <h1>{film.Title}</h1>
                 </header>
+                <img 
+                    src={poster} 
+                    alt={`Forsidebilde av ${film.Title}`}
+                    onError={(e)=>{
+                        e.target.src = "/no-image.png"
+                    }} />
                 <p>Utgivelsesår: {film.Year}</p>
                 <p>Spilletid: {film.Runtime}</p>
+                <p>Skuespillere: {film.Actors ? film.Actors.split(",").slice(0,5).join(", ") : "Ikke oppgitt"}</p>
+                <p>Sjanger: {film.Genre || "Ikke oppgitt"}</p>
+                <p>Aldersgrense: {film.Rated || "Ikke oppgitt"}</p>
+                <p>Beskrivelse: {film.Plot || "Ikke oppgitt"}</p>
             </article>
         </main>
     )
