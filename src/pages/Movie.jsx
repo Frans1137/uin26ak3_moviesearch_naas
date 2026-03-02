@@ -30,7 +30,7 @@ export default function Movie() {
 
         getMovieDetails()
     }
-    , [imdbID]
+    , []
 )
 
     if (!film) {
@@ -49,8 +49,8 @@ export default function Movie() {
                     src={poster} 
                     alt={`Forsidebilde av ${film.Title}`}
                     onError={(e)=>{
-                        e.target.src = "/no-image.png"
-                    }} />
+                    e.target.src = "/no-image.png"
+                }} />
                 <p>Utgivelsesår: {film.Year}</p>
                 <p>Spilletid: {film.Runtime}</p>
                 <p>Skuespillere: {film.Actors ? film.Actors.split(",").slice(0,5).join(", ") : "Ikke oppgitt"}</p>
