@@ -36,21 +36,21 @@ export default function SearchForm({ getMovies }) {
     console.log(history)
 
     return (
-        <form onSubmit={handleSubmit}>
-        <label>
-            Søk etter film
-            <input
-                type="search"
-                placeholder="Harry Potter.."
-                value={search}
-                onChange={handleChange}
-            />
-        </label>
-        <History history={history} setSearch={setSearch} />
-        <button type="submit">Søk</button>
-        {/* <section>
-            <MovieList movies={movies} />
-        </section> */}
+        <form className="searchForm" onSubmit={handleSubmit}>
+            <label >
+                <p>Søk etter film</p>
+                <input
+                    type="search"
+                    placeholder="Harry Potter.."
+                    value={search}
+                    onChange={handleChange}
+                />
+            <button type="submit">Søk</button>
+            </label>
+            <section >
+                <p>Dine lagrede søk</p>
+                <History history={history} setSearch={setSearch} />
+            </section>
         </form>
     )
 }

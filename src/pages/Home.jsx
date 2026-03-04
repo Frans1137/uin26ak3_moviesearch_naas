@@ -38,17 +38,6 @@ export default function Home(){
         }
     }
 
-        // if (movieCache[query]) {
-    //     setMovies(movieCache[query])
-    //     return
-    // }
-
-    // setMovieCache(prev =>({
-    //     ...prev, 
-    //     [imdbID]: data
-    // }))
-    
-
     useEffect(()=>{
         const getJbMovies = async () => {
             try {
@@ -72,31 +61,33 @@ export default function Home(){
         }
         getJbMovies()
 
-        // if (!movies) getJBMovies()
     }, [apiKey]
-    // , [imdbID] 
 )
 
     return (
         <main>
             <header>
-                <button onClick={() => setViewMode("dropdown")} >
-                    Dropdown-visning
-                </button>
-                <button onClick={() => setViewMode("page")} >
-                    Egen side
-                </button>
-            </header>
-
             <h1>Forside</h1>
-            <SearchForm 
-                getMovies={getMovies} 
-            />
+                <section>
+                    Visningformat
+                    <button onClick={() => setViewMode("dropdown")} >
+                        Dropdown-visning
+                    </button>
+                    <button onClick={() => setViewMode("page")} >
+                        Egen side
+                    </button>
+                </section>
+            </header>
+            <SearchForm getMovies={getMovies} />
+
             {loading && <p>Laster filmer</p>}
 
             {error && <p>{error}</p>}
 
-            {!loading && !error && movies.length > 0 && (
+            {!loading 
+                && !error 
+                && movies.length > 0 
+                && (
                 <ul>
                     {movies.map((movie) => (
                         <MovieCard
@@ -107,9 +98,10 @@ export default function Home(){
                     ))}
                 </ul>
             )}
-            {!loading && !error && movies.length === 0 && (
-                <p>Ingen filmer å vise</p>
-            )}
+            {!loading 
+                && !error 
+                && movies.length === 0 
+                && (<p>Ingen filmer å vise</p>)}
         </main>
     )
 }

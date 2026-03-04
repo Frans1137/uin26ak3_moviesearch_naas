@@ -1,0 +1,71 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+}
+
+
+
+.searchForm{
+    display: flex;
+    padding-top: 1rem;
+    gap: 5px;
+        p{
+            margin: 0;
+            padding-bottom: 3px;
+        }
+        input{
+            display: flex;
+            gap: 5px;
+            padding: 0.2rem;
+            margin-bottom: 3px;
+            width: 400px;
+        }
+        button{
+            width: 150px;
+            margin-top: 3px;
+            height: 24px;
+        }
+        section select{
+            padding: 0.2rem;
+        }
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    h1{
+    margin: 0;
+    font-size: 45px;
+    }
+    section{
+        display: flex;
+        gap: 10px;
+    }
+    button{
+        height: 24px;
+    }
+}
+
+/* .movieList {
+    list-style: none;
+    display: flex;
+    h2, p{
+        margin: 0;
+        padding: 0;
+    }
+} */
+
+ul, li, article, a{
+    /* display: flex;
+    flex-direction: column; */
+    h2, p{
+    display: flex;
+    flex-direction: column;
+}
+}

@@ -41,7 +41,7 @@ export default function Movie() {
 
     return (
         <main>
-            <article>
+            <article className="movieList">
                 <header>
                     <h1>{film.Title}</h1>
                 </header>
