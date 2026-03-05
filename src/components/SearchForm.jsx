@@ -1,39 +1,46 @@
 import { useState, useEffect } from "react";
-// import MovieList from "../components/MovieList";
 import History from "./History";
 
 export default function SearchForm({ getMovies }) {
     const [search, setSearch] = useState('')
-    const storedHistory = localStorage.getItem("search")
-    // const [movieCache, setMovies] = useState({})
+    // const storedHistory = localStorage.getItem("search")
 
-    const [history, setHistory] = useState(() =>{
-        try {
-            return storedHistory ? JSON.parse(storedHistory) : []
-        } catch {
-            return []
-        }
-    })
+    const removeHistory = () => {
+        if (!confirm("Vil du slette tidligere søk?")) return
+        setHistory([])
+}
 
-    console.log("denne kommer fra storage", storedHistory)
+const [history, setHistory] = useState(() => {
+    try {
+        const stored = localStorage.getItem("search")
+        return stored ? JSON.parse(stored) : []
+    } catch {
+        return []
+    }
+})
 
     useEffect(()=>{
         localStorage.setItem("search", JSON.stringify(history))
     }, [history])
 
     const handleChange = (e)=>{
-        setSearch(e.target.value)
+        const value = e.target.value
+        setSearch(value)
+
+        if (value.length >= 4) {
+            getMovies(value)
+        }
     }
     
     const handleSubmit = (e)=>{
         e.preventDefault()
         if (!search.trim()) return
         getMovies(search)
-        setHistory((prev) => 
-            prev.includes(search) ? prev : [...prev, search])
-        setSearch("")
+
+        setHistory(prev =>
+            prev.includes(search) ? prev : [search, ...prev].slice(0, 10)
+        )
     }
-    console.log(history)
 
     return (
         <form className="searchForm" onSubmit={handleSubmit}>
@@ -50,7 +57,12 @@ export default function SearchForm({ getMovies }) {
             <section >
                 <p>Dine lagrede søk</p>
                 <History history={history} setSearch={setSearch} />
+                {history.length > 0 && (
+                <button type="button" onClick={removeHistory}>Slett lagrede søk</button>
+                )
+            }
             </section>
+            
         </form>
     )
 }

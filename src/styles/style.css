@@ -32,6 +32,7 @@
         }
         section select{
             padding: 0.2rem;
+            margin-right: 5px;
         }
 }
 

@@ -8,7 +8,7 @@ export default function Movie() {
     const [film, setFilm] = useState(null)
 
     const apiKey = import.meta.env.VITE_OMDB_API_KEY
-    const imdbID = movie.split("-").pop()
+    const imdbID = movie.slice(movie.lastIndexOf("-") + 1)
 
     useEffect(() => {
 
@@ -17,13 +17,11 @@ export default function Movie() {
                 const response = await fetch(
                     `https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`
                 )
-
+                
                 const data = await response.json()
-
                 if (data.Response === "True") {
                     setFilm(data)
                 }
-
             } catch (err) {
                 console.error("Feil ved henting av film:", err)
             }
@@ -31,11 +29,11 @@ export default function Movie() {
 
         getMovieDetails()
     }
-    , []
+    , [apiKey, imdbID]
 )
 
     if (!film) {
-        return <p>Henter informasjon om film</p>
+        return <p>Henter informasjon om film..</p>
     }
 
     const poster = film.Poster !== "N/A" ? film.Poster : "/no-image.png"

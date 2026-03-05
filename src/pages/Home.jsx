@@ -4,14 +4,10 @@ import MovieCard from "../components/MovieCard"
 
 export default function Home(){
     const [movies, setMovies] = useState([])
-    const [viewMode, // setViewMode
-                                    ] = useState("page")
+    const [viewMode] = useState("page")
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
-    // const [search, setSearch] = useState("")
-    // const [movieCache, setMovieCache] = useState({})
 
-    // const baseUrl = `http://www.omdbapi.com/?s=${search}&apikey=`
     const apiKey = import.meta.env.VITE_OMDB_API_KEY
 
     const getMovies = async (query) => {
@@ -26,13 +22,18 @@ export default function Home(){
             const data = await response.json()
 
         if (data.Response === "True") {
-            setMovies(data.Search)
+            const uniqueMovies = [
+                ...new Map(data.Search.map(movie => [movie.imdbID, movie])).values()
+            ]
+            setMovies(uniqueMovies)
+
+            localStorage.setItem("lastSearch", query)
+            localStorage.setItem("lastResults", JSON.stringify(data.Search))
         } else {
             setMovies([])
-            setError("Fant ikke filmen du søkte etter. Prøv igjen!")
         }
         } catch (err) {
-            console.error("Feil ved henting av filmer:", err)
+            console.error("Feil ved henting av filmer", err)
             setError("Noe gikk galt ved henting av data")
         } finally {
             setLoading(false)
@@ -40,6 +41,7 @@ export default function Home(){
     }
 
     useEffect(()=>{
+
         const getJbMovies = async () => {
             try {
                 setLoading(true)
@@ -54,7 +56,7 @@ export default function Home(){
                         setMovies([])
                     }
             } catch (err) {
-                console.error("Feil ved henting av Bond-filmer:", err)
+                console.error("Feil ved henting av Bond-filmer", err)
                 setError("Kunne ikke laste startside")
             } finally {
                 setLoading(false)
@@ -68,22 +70,12 @@ export default function Home(){
     return (
         <main>
             <header>
-            <h1>Forside</h1>
-                {/* <section>
-                    Visningformat
-                    <button onClick={() => setViewMode("dropdown")} >
-                        Dropdown-visning
-                    </button>
-                    <button onClick={() => setViewMode("page")} >
-                        Egen side
-                    </button>
-                </section> */}
+                <h1>Forside</h1>
             </header>
             <SearchForm getMovies={getMovies} />
 
-            {/* {loading && <p>Laster filmer</p>} */}
-
-            {/* {error && <p>{error}</p>} */}
+            {loading && <p>Laster filmer</p>}
+            {error && <p>{error}</p>}
 
             {!loading 
                 && !error 

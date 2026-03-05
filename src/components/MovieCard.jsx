@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 
 export default function MovieCard({ movie, viewMode }) {
-    // const [expanded, setExpanded] = useState(false)
     if (!movie) return null
 
     const slug = movie.Title.toLowerCase().replaceAll(" ", "-")

@@ -3,14 +3,12 @@ export default function MovieDetails({ movie }) {
 
   return (
     <>
-        <p>Utgivelsesår: {movie.Year}</p>
-        <p>Spilletid: {movie.Runtime}</p>
-        <p>
-        Skuespillere:{" "}
+        <p>Utgivelsesår: {movie.Year || "Ikke oppgitt"}</p>
+        <p>Spilletid: {movie.Runtime || "Ikke oppgitt"}</p>
+        <p>Skuespillere:{" "}
         {movie.Actors
             ? movie.Actors.split(",").slice(0, 5).join(", ")
-            : "Ikke oppgitt"}
-        </p>
+            : "Ikke oppgitt"}</p>
         <p>Sjanger: {movie.Genre || "Ikke oppgitt"}</p>
         <p>Aldersgrense: {movie.Rated || "Ikke oppgitt"}</p>
         <p>Beskrivelse: {movie.Plot || "Ikke oppgitt"}</p>
