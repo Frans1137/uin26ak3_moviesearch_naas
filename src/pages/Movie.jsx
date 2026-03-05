@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
+import MovieDetails from "../components/MovieDetails"
 
 export default function Movie() {
 
@@ -51,12 +52,7 @@ export default function Movie() {
                     onError={(e)=>{
                     e.target.src = "/no-image.png"
                 }} />
-                <p>Utgivelsesår: {film.Year}</p>
-                <p>Spilletid: {film.Runtime}</p>
-                <p>Skuespillere: {film.Actors ? film.Actors.split(",").slice(0,5).join(", ") : "Ikke oppgitt"}</p>
-                <p>Sjanger: {film.Genre || "Ikke oppgitt"}</p>
-                <p>Aldersgrense: {film.Rated || "Ikke oppgitt"}</p>
-                <p>Beskrivelse: {film.Plot || "Ikke oppgitt"}</p>
+                <MovieDetails movie={film} />
             </article>
         </main>
     )

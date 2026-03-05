@@ -4,7 +4,8 @@ import MovieCard from "../components/MovieCard"
 
 export default function Home(){
     const [movies, setMovies] = useState([])
-    const [viewMode, setViewMode] = useState("page")
+    const [viewMode, // setViewMode
+                                    ] = useState("page")
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
     // const [search, setSearch] = useState("")
@@ -68,7 +69,7 @@ export default function Home(){
         <main>
             <header>
             <h1>Forside</h1>
-                <section>
+                {/* <section>
                     Visningformat
                     <button onClick={() => setViewMode("dropdown")} >
                         Dropdown-visning
@@ -76,13 +77,13 @@ export default function Home(){
                     <button onClick={() => setViewMode("page")} >
                         Egen side
                     </button>
-                </section>
+                </section> */}
             </header>
             <SearchForm getMovies={getMovies} />
 
-            {loading && <p>Laster filmer</p>}
+            {/* {loading && <p>Laster filmer</p>} */}
 
-            {error && <p>{error}</p>}
+            {/* {error && <p>{error}</p>} */}
 
             {!loading 
                 && !error 
@@ -101,7 +102,7 @@ export default function Home(){
             {!loading 
                 && !error 
                 && movies.length === 0 
-                && (<p>Ingen filmer å vise</p>)}
+                && (<p>Fant ingen filmer som matcher søket ditt</p>)}
         </main>
     )
 }
