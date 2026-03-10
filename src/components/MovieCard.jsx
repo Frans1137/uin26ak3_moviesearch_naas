@@ -11,30 +11,30 @@ export default function MovieCard({ movie, viewMode }) {
 
 return (
     <li>
-      <article>
+      <article className="movieCard">
         {viewMode === "page" ? (
           <Link to={`/${slug}-${movie.imdbID}`}>
             <h2>{movie.Title}</h2>
-            <p>Utgitt {movie.Year}</p>
             <img
               src={poster}
               alt={`Forsidebilde av filmen ${movie.Title}`}
               onError={(e) => {
-                e.target.src = "/no-image.png"
+              e.target.src = "/no-image.png"
               }}
-            />
+              />
+              <p>Utgitt {movie.Year}</p>
           </Link>
         ) : (
           <>
             <h2>{movie.Title}</h2>
-            <p>{movie.Year}</p>
             <img
               src={poster}
               alt={`Forsidebilde av filmen ${movie.Title}`}
               onError={(e) => {
                 e.target.src = "/no-image.png"
               }}
-            />
+              />
+              <p>{movie.Year}</p>
           </>
         )
         }

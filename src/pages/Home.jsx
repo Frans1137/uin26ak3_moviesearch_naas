@@ -25,6 +25,7 @@ export default function Home(){
             const uniqueMovies = [
                 ...new Map(data.Search.map(movie => [movie.imdbID, movie])).values()
             ]
+
             setMovies(uniqueMovies)
 
             localStorage.setItem("lastSearch", query)
@@ -81,7 +82,7 @@ export default function Home(){
                 && !error 
                 && movies.length > 0 
                 && (
-                <ul>
+                <ul className="movieList">
                     {movies.map((movie) => (
                         <MovieCard
                             key={movie.imdbID}
