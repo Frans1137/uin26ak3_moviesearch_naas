@@ -80,9 +80,10 @@ header button{
 .movieCard p{
     margin: 2px;
     text-align: center;
+    color: #fff;
 }
     
-.movieCard h2, p{
+.movieCard h2{
     color: #fff;
 }
 
@@ -101,11 +102,12 @@ header button{
 .movieCard img{
     display: flex;
     transition: transform 0.3s ease;
-    width: 100%;
-    height: auto;
-    max-height: 400px;
+    width: auto;
+    max-height: 500px;
     margin-top: auto;
 }
+
+                        /* MovieList */
 
 .movieList{
     display: flex;
@@ -119,4 +121,36 @@ header button{
     display: flex;
     flex: 1 1 350px;
     max-width: 400px;
+}
+
+                        /* MoviePage */
+
+.moviePage{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 1rem;
+    padding: 0;
+}
+
+.moviePage h1{
+    color: #fff;
+}
+
+.moviePage p{
+    color: #fff;
+}
+
+@media (max-width: 700px){
+
+    article{
+        flex-direction: column;
+    }
+
+    .moviePage img{
+        width: 100%;
+        height: auto;
+        max-width: 300px;
+    }
+
 }

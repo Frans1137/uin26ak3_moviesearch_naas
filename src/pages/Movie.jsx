@@ -40,17 +40,21 @@ export default function Movie() {
 
     return (
         <main>
-            <article>
-                <header>
-                    <h1>{film.Title}</h1>
-                </header>
-                <img 
-                    src={poster} 
-                    alt={`Forsidebilde av ${film.Title}`}
-                    onError={(e)=>{
-                    e.target.src = "/no-image.png"
-                }} />
+            <header>
+                <h1>{film.Title}</h1>
+            </header>
+            <article className="moviePage">
+                <section>   
+                    <img 
+                        src={poster} 
+                        alt={`Forsidebilde av ${film.Title}`}
+                        onError={(e)=>{
+                            e.target.src = "/no-image.png"
+                        }} />
+                </section>
+                <section className="movieDetails">
                 <MovieDetails movie={film} />
+                </section>
             </article>
         </main>
     )
