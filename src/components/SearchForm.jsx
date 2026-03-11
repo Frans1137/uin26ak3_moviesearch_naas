@@ -3,13 +3,15 @@ import History from "./History";
 
 export default function SearchForm({ getMovies }) {
     const [search, setSearch] = useState('')
-    // const storedHistory = localStorage.getItem("search")
-
+    
+// Siden knapp for slett tidligere søk skal ligge ved søkelinje valgte jeg å legge den i samme komponent som søk.
+// Ved Ok setter den array i History til tom. Ved Cancel forblir søkehistorikk lagret. 
     const removeHistory = () => {
         if (!confirm("Vil du slette tidligere søk?")) return
         setHistory([])
 }
 
+// Tar imot fra handleSubmit - viser som element i HTML i bunnen av denne fila. 
 const [history, setHistory] = useState(() => {
     try {
         const stored = localStorage.getItem("search")
@@ -27,14 +29,17 @@ const [history, setHistory] = useState(() => {
         const value = e.target.value
         setSearch(value)
 
+        // satte funksjon getMovies og API-fetch til å skje ved 4 tegn
         if (value.length >= 4) {
             getMovies(value)
         }
     }
     
+    // Tar imot søk fra input-felt (og fjerner mellomrom)
     const handleSubmit = (e)=>{
         e.preventDefault()
-        if (!search.trim()) return
+        if (!search.trim()) 
+            return
         getMovies(search)
 
         setHistory(prev =>
@@ -57,12 +62,8 @@ const [history, setHistory] = useState(() => {
             <section >
                 <p>Dine lagrede søk</p>
                 <History history={history} setSearch={setSearch} />
-                {history.length > 0 && (
                 <button type="button" onClick={removeHistory}>Slett lagrede søk</button>
-                )
-            }
             </section>
-            
         </form>
     )
 }

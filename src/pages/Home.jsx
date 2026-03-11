@@ -6,7 +6,6 @@ export default function Home(){
     const [movies, setMovies] = useState([])
     const [viewMode] = useState("page")
     const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(false)
 
     const apiKey = import.meta.env.VITE_OMDB_API_KEY
 
@@ -14,8 +13,6 @@ export default function Home(){
         if (!query || query.length < 3) return
 
         try {
-            setLoading(true)
-            setError(null)
             const response = await fetch(
                 `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`
             )
@@ -36,8 +33,6 @@ export default function Home(){
         } catch (err) {
             console.error("Feil ved henting av filmer", err)
             setError("Noe gikk galt ved henting av data")
-        } finally {
-            setLoading(false)
         }
     }
 
@@ -45,7 +40,6 @@ export default function Home(){
 
         const getJbMovies = async () => {
             try {
-                setLoading(true)
                 const response = await fetch(
                     `https://www.omdbapi.com/?apikey=${apiKey}&s=James Bond&type=movie` )
 
@@ -59,8 +53,6 @@ export default function Home(){
             } catch (err) {
                 console.error("Feil ved henting av Bond-filmer", err)
                 setError("Kunne ikke laste startside")
-            } finally {
-                setLoading(false)
             }
         }
         getJbMovies()
@@ -74,14 +66,6 @@ export default function Home(){
                 <h1>Forside</h1>
             </header>
             <SearchForm getMovies={getMovies} />
-
-            {loading && <p>Laster filmer</p>}
-            {error && <p>{error}</p>}
-
-            {!loading 
-                && !error 
-                && movies.length > 0 
-                && (
                 <ul className="movieList">
                     {movies.map((movie) => (
                         <MovieCard
@@ -91,11 +75,7 @@ export default function Home(){
                         />
                     ))}
                 </ul>
-            )}
-            {!loading 
-                && !error 
-                && movies.length === 0 
-                && (<p>Fant ingen filmer som matcher søket ditt</p>)}
+                <p>{!error}Fant ingen filmer som matcher søket ditt</p>
         </main>
     )
 }
