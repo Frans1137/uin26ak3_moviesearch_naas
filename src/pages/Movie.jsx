@@ -4,7 +4,8 @@ import MovieDetails from "../components/MovieDetails"
 
 export default function Movie() {
 
-    const { movie } = useParams()
+     
+    const { movie } = useParams() // useParams for å returnere dynamiske parametere fra URL som matcher rute.
     const [film, setFilm] = useState(null)
 
     // Jeg fikk litt trøbbel med API-fetch slik vi gikk gjennom i workshop, og etter noen runder med ChatGPT fant
@@ -36,7 +37,7 @@ export default function Movie() {
         return <p>Henter informasjon om film..</p>
     }
 
-    const poster = film.Poster !== "N/A" ? film.Poster : "/no-image.png"
+    const poster = film.Poster !== "N/A" ? film.Poster : "/no-image.png" // mangler bilde-fil som skal erstatte manglende bilde
 
     return (
         <main>
@@ -45,7 +46,7 @@ export default function Movie() {
             </header>
             <article className="moviePage">
                 <section>   
-                    <img 
+                    <img // viser bilde hvis det eksisterer. Hvis ikke skal bilde no-image.png vises
                         src={poster} 
                         alt={`Forsidebilde av ${film.Title}`}
                         onError={(e)=>{
@@ -53,7 +54,7 @@ export default function Movie() {
                         }} />
                 </section>
                 <section className="movieDetails">
-                <MovieDetails movie={film} />
+                <MovieDetails movie={film} /> {/* Henter/rendrer detaljer om film. Kan enkelt endres og oppdateres i eget komponent */}
                 </section>
             </article>
         </main>
