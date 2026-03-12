@@ -29,7 +29,7 @@ const [history, setHistory] = useState(() => {
         const value = e.target.value
         setSearch(value)
 
-        // satte funksjon getMovies og API-fetch til å skje ved 4 tegn
+        // getMovies kjører ved 4 tegn
         if (value.length >= 4) {
             getMovies(value)
         }

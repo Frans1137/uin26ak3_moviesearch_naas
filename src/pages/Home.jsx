@@ -4,8 +4,7 @@ import MovieCard from "../components/MovieCard"
 
 export default function Home(){
     const [movies, setMovies] = useState([])
-    const [viewMode] = useState("page")
-    const [error, setError] = useState(null)
+    const [error] = useState(null)
 
     //jeg fikk trøbbel med API-fetch vi fikk i workshop. Noen runder med ChatGPT så fant jeg en annen løsning som fungerte for meg.
     //Fetcher fra API både her og i Movie.jsx. Det er kanskje uheldig når jeg tenker meg om, men jeg vet ikke om jeg har tid til å 
@@ -19,26 +18,23 @@ export default function Home(){
 
         try {
             const response = await fetch(
-                `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`
+                `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}` //Endret til query for å unngå at jeg klussa og blanda med search fra handleSubmit i SearchForm
             )
+
             const data = await response.json()
+            if (data.Response === "True") {
+                const uniqueMovies = 
+                    [...new Map(data.Search.map(movie => [movie.imdbID, movie])).values()]
+                setMovies(uniqueMovies)
 
-        if (data.Response === "True") {
-            const uniqueMovies = [
-                ...new Map(data.Search.map(movie => [movie.imdbID, movie])).values()
-            ]
-
-            setMovies(uniqueMovies)
-
-            localStorage.setItem("lastSearch", query)
-        } else {
-            setMovies([])
+                localStorage.setItem("lastSearch", query)
+            } else {
+                setMovies([])
+            }
+            } catch (err) {
+                console.error("Feil ved henting av filmer", err)
+            }
         }
-        } catch (err) {
-            console.error("Feil ved henting av filmer", err)
-            setError("Noe gikk galt ved henting av data")
-        }
-    }
 
     useEffect(()=>{
 
@@ -59,7 +55,6 @@ export default function Home(){
                     }
             } catch (err) {
                 console.error("Feil ved henting av Bond-filmer", err)
-                setError("Kunne ikke laste startside")
             }
         }
         getJbMovies()
@@ -78,7 +73,6 @@ export default function Home(){
                         <MovieCard
                             key={movie.imdbID}
                             movie={movie}
-                            viewMode={viewMode}
                         />
                     ))}
                 </ul>

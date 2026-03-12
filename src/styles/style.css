@@ -120,7 +120,7 @@ header button{
 .movieList li{
     display: flex;
     flex: 1 1 350px;
-    max-width: 400px;
+    max-width: 368px;
 }
 
                         /* MoviePage */
