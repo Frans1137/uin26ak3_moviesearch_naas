@@ -11,7 +11,7 @@ export default function SearchForm({ getMovies }) {
         setHistory([])
 }
 
-// Tar imot fra handleSubmit - viser som element i HTML i bunnen av denne fila. 
+// Tar imot input fra handleSubmit - viser som element i HTML i bunnen av denne fila. 
 const [history, setHistory] = useState(() => {
     try {
         const stored = localStorage.getItem("search")
@@ -57,12 +57,16 @@ const [history, setHistory] = useState(() => {
                     value={search}
                     onChange={handleChange}
                 />
-            <button type="submit">Søk</button>
+                <button type="submit">
+                    Søk
+                </button>
             </label>
             <section >
                 <p>Dine lagrede søk</p>
                 <History history={history} setSearch={setSearch} />
-                <button type="button" onClick={removeHistory}>Slett lagrede søk</button>
+                <button type="button" onClick={removeHistory}>
+                    Slett lagrede søk
+                </button>
             </section>
         </form>
     )

@@ -1,3 +1,7 @@
+
+/* Valgte ikke nesting i CSS fordi jeg fikk rød error i validator. 
+Kunne gjort koden kortere hvis jeg hadde valgt nesting */
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 2rem;
