@@ -10,16 +10,15 @@ export default function Home(){
     //Fetcher fra API både her og i Movie.jsx. Det er kanskje uheldig når jeg tenker meg om, men jeg vet ikke om jeg har tid til å 
     //sette meg inn i hvordan jeg gjør det annerledes. Opprinnelig tenkte jeg å lage en "drop-down"-visning som skulle vise
     //detaljer om filmen, men gikk bort fra det når det viste seg å være vanskeligere enn først tenkt. Det gjorde nok at jeg klussa til 
-    //litt med API-fetch, og ikke gikk tilbake til begynnelsen før jeg fortsatte oppgaven. 
-    const apiKey = import.meta.env.VITE_OMDB_API_KEY
+    //litt med API-fetch, og ikke gikk tilbake til begynnelsen før jeg fortsatte oppgaven.
+
+    const apiKey = import.meta.env.VITE_OMDB_API_KEY ?? "11ba26a5"
 
     const getMovies = async (query) => {
         if (!query || query.length < 3) return
 
         try {
-            const response = await fetch(
-                `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}` //Endret til query for å unngå at jeg klussa og blanda med search fra handleSubmit i SearchForm
-            )
+            const response = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`) //Endret til query for å unngå at jeg klussa og blanda med search fra handleSubmit i SearchForm
 
             const data = await response.json()
             if (data.Response === "True") {
@@ -45,8 +44,7 @@ export default function Home(){
         //fått det til å fungere helt. 
         const getJbMovies = async () => {
             try {
-                const response = await fetch(
-                    `https://www.omdbapi.com/?apikey=${apiKey}&s=James Bond&type=movie` )
+                const response = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=James Bond&type=movie`)
 
                 const data = await response.json()
 

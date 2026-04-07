@@ -7,7 +7,7 @@ export default function History({history, setSearch}){
     return (
         <select 
             onChange={handleChange}
-            value=""
+            // value="" // kommentert ut denne så jeg kan velge alle alternative tidligere søkeord fra liste
             disabled={history.length === 0} 
             >
             {history.length > 0 ? (
@@ -17,7 +17,8 @@ export default function History({history, setSearch}){
                 </option>
             )) 
         ) : (
-                <option value="">Ingen søk</option>
+                // <option value="">Ingen søk</option> // kommentert ut for å fjerne value=""
+                <option>Ingen søk</option>
             )}
                 </select>
         )

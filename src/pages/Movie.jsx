@@ -7,10 +7,10 @@ export default function Movie() {
     // useParams for å returnere dynamiske parametere fra URL som matcher rute.
     const { movie } = useParams() 
     const [film, setFilm] = useState(null)
-
-    // Jeg fikk problemer med API-fetch slik vi gikk gjennom i workshop, og etter noen runder med ChatGPT fant
-    // jeg en alternativ (men kanskje mer rotete?) måte å løse det på. Det fungerte som ønsket. 
-    const apiKey = import.meta.env.VITE_OMDB_API_KEY
+    
+    // kode fra .env : VITE_OMDB_API_KEY=11ba26a5
+    const apiKey = import.meta.env.VITE_OMDB_API_KEY ?? "11ba26a5" // EKSTRA SJANSE lagt til API-nøkkel i kode som alternativ til .env
+    // vurderte om jeg skulle fjerne .env fra .gitignore, men husket det ble nevnt i forelesning at det var dårlig praksis å legge .env med API i åpen kode på GitHub
     const imdbID = movie.slice(movie.lastIndexOf("-") + 1)
 
     useEffect(() => {
