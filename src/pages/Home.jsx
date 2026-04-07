@@ -4,7 +4,7 @@ import MovieCard from "../components/MovieCard"
 
 export default function Home(){
     const [movies, setMovies] = useState([])
-    const [error] = useState(null)
+    const [error, setError] = useState(null) // Oppdatert error state
 
     //jeg fikk trøbbel med API-fetch vi fikk i workshop. Noen runder med ChatGPT så fant jeg en annen løsning som fungerte for meg.
     //Fetcher fra API både her og i Movie.jsx. Det er kanskje uheldig når jeg tenker meg om, men jeg vet ikke om jeg har tid til å 
@@ -26,10 +26,12 @@ export default function Home(){
                 const uniqueMovies = 
                     [...new Map(data.Search.map(movie => [movie.imdbID, movie])).values()]
                 setMovies(uniqueMovies)
+                setError(null) // lagt til error state
 
                 localStorage.setItem("lastSearch", query)
             } else {
                 setMovies([])
+                setError("Fant ingen filmer som matcher søket ditt") // kommentar ved error
             }
             } catch (err) {
                 console.error("Feil ved henting av filmer", err)
@@ -76,7 +78,7 @@ export default function Home(){
                         />
                     ))}
                 </ul>
-                <p>{error}Fant ingen filmer som matcher søket ditt</p>
+                {error && <p>{error}</p>} {/* Error i JSX */}
         </main>
     )
 }
