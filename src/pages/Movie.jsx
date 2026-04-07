@@ -31,7 +31,6 @@ export default function Movie() {
     }, [apiKey, imdbID]
 )
 
-    //Kan denne fjernes?
     if (!film) { 
         return <p>Henter informasjon om film..</p>
     }

@@ -76,7 +76,7 @@ export default function Home(){
                         />
                     ))}
                 </ul>
-                <p>{!error}Fant ingen filmer som matcher søket ditt</p>
+                <p>{error}Fant ingen filmer som matcher søket ditt</p>
         </main>
     )
 }
