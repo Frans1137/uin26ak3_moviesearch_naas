@@ -7,10 +7,9 @@ export default function Movie() {
     // useParams for å returnere dynamiske parametere fra URL som matcher rute.
     const { movie } = useParams() 
     const [film, setFilm] = useState(null)
-    
-    // kode fra .env : VITE_OMDB_API_KEY=11ba26a5
-    const apiKey = import.meta.env.VITE_OMDB_API_KEY ?? "11ba26a5" // EKSTRA SJANSE lagt til API-nøkkel i kode som alternativ til .env
-    // vurderte om jeg skulle fjerne .env fra .gitignore, men husket det ble nevnt i forelesning at det var dårlig praksis å legge .env med API i åpen kode på GitHub
+
+    // fra .env : VITE_OMDB_API_KEY=11ba26a5
+    const apiKey = import.meta.env.VITE_OMDB_API_KEY
     const imdbID = movie.slice(movie.lastIndexOf("-") + 1)
 
     useEffect(() => {
@@ -43,7 +42,7 @@ export default function Movie() {
                 <h1>{film.Title}</h1>
             </header>
             <article className="moviePage">
-                <section>   
+                <section> 
                     <img // viser bilde hvis det eksisterer. 
                         src={poster} 
                         alt={`Forsidebilde av ${film.Title}`}

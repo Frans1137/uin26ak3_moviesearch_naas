@@ -12,14 +12,12 @@ export default function Home(){
     //detaljer om filmen, men gikk bort fra det når det viste seg å være vanskeligere enn først tenkt. Det gjorde nok at jeg klussa til 
     //litt med API-fetch, og ikke gikk tilbake til begynnelsen før jeg fortsatte oppgaven.
 
-    const apiKey = import.meta.env.VITE_OMDB_API_KEY ?? "11ba26a5"
-
+    const apiKey = import.meta.env.VITE_OMDB_API_KEY
     const getMovies = async (query) => {
         if (!query || query.length < 3) return
 
         try {
             const response = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`) //Endret til query for å unngå at jeg klussa og blanda med search fra handleSubmit i SearchForm
-
             const data = await response.json()
             if (data.Response === "True") {
                 const uniqueMovies = 
